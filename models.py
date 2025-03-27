@@ -58,12 +58,12 @@ class Issue(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        if not self.Issue_id:
+        # Check if the object is being created (no primary key yet)
+        if not self.pk:
+            super().save(*args, **kwargs)  # Save the object to generate the primary key
+        if not self.Issue_id:  # Generate Issue_id only if it doesn't already exist
             self.Issue_id = f"I-{self.pk:05d}"  # Generate a unique Issue ID
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.title
+        super().save(*args, **kwargs)  # Save the object again with the Issue_id
 
 # Registration model
 class Registration(models.Model):
@@ -88,4 +88,5 @@ class Activity(models.Model):
         verbose_name_plural="Activities"
         ordering = ['-timestamp']
     def __str__(self):
+        
             return f"{self.action} by {self.user.username} on {self.timestamp}"
