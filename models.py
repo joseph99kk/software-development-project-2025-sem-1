@@ -64,7 +64,19 @@ class Issue(models.Model):
         if not self.Issue_id:  # Generate Issue_id only if it doesn't already exist
             self.Issue_id = f"I-{self.pk:05d}"  # Generate a unique Issue ID
         super().save(*args, **kwargs)  # Save the object again with the Issue_id
-
+        if is_new:#send email to only new issues
+            subject = f"New Issue Created: {self.title}"
+            message = f"A Issue has been created: \n\nTitle: {self.title}\nDescription: {self.description}"
+            receipient_list = [self.user.email]
+            send_mail(
+                subject,
+                message,
+                'a@gamil.com',
+                receipient_list,
+                fail_silently=False,
+            )
+    def __str__(self):
+        return self.title
 # Registration model
 class Registration(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='registration')
@@ -90,3 +102,7 @@ class Activity(models.Model):
     def __str__(self):
         
             return f"{self.action} by {self.user.username} on {self.timestamp}"
+        
+    
+
+    
