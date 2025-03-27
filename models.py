@@ -71,7 +71,7 @@ class Issue(models.Model):
             send_mail(
                 subject,
                 message,
-                'a@gamil.com',
+                'a@gmail.com',
                 receipient_list,
                 fail_silently=False,
             )
