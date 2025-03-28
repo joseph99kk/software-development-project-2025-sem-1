@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 
 # Custom User model
 class User(AbstractUser):
@@ -59,6 +60,7 @@ class Issue(models.Model):
 
     def save(self, *args, **kwargs):
         # Check if the object is being created (no primary key yet)
+        is_new = self.pk is None
         if not self.pk:
             super().save(*args, **kwargs)  # Save the object to generate the primary key
         if not self.Issue_id:  # Generate Issue_id only if it doesn't already exist
@@ -67,11 +69,11 @@ class Issue(models.Model):
         if is_new:#send email to only new issues
             subject = f"New Issue Created: {self.title}"
             message = f"A Issue has been created: \n\nTitle: {self.title}\nDescription: {self.description}"
-            receipient_list = [self.user.email]
+            receipient_list = ['codewithlynah@gmail.com']
             send_mail(
                 subject,
                 message,
-                'a@gmail.com',
+                'codewithlynah@gmail.com',
                 receipient_list,
                 fail_silently=False,
             )
