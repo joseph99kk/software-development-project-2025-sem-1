@@ -147,7 +147,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
 EMAIL_PORT = 587  # Port for TLS
 EMAIL_USE_TLS = True  # Use TLS for secure connection
 EMAIL_HOST_USER = 'codewithlynah@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = ''  # Your email password
+EMAIL_HOST_PASSWORD = 'vvai twfo qvkk wiyc'  # Your email password
 DEFAULT_FROM_EMAIL = 'UNI <codewithlynah@gmail.com>'  # Default sender email
 
 
