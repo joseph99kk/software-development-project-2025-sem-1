@@ -66,7 +66,7 @@ class Issue(models.Model):
         if not self.Issue_id:  # Generate Issue_id only if it doesn't already exist
             self.Issue_id = f"I-{self.pk:05d}"  # Generate a unique Issue ID
         super().save(*args, **kwargs)  # Save the object again with the Issue_id
-        if is_new:#send email to only new issues
+        if is_new: #send email to only new issues
             subject = f"New Issue Created: {self.title}"
             message = f"A Issue has been created: \n\nTitle: {self.title}\nDescription: {self.description}"
             receipient_list = ['codewithlynah@gmail.com']
