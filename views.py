@@ -56,7 +56,7 @@ class DepartmentDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = DepartmentSerializer
     permission_classes = [IsAuthenticated]
 
-class IssueListCreateView(ListCreateAPIView):
+class IssueListCreateView(ListCreateAPIView):#API endpoints to submit issues
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
     permission_classes = [IsAuthenticated]
