@@ -10,6 +10,8 @@ from rest_framework.views import APIView
 from rest_framework import viewsets  # Correct import for ModelViewSet
 from .models import Department, Issue, Category
 from.permissions import IsOwnerOrStaff
+from .serializers import IssueFormSerializer
+from django.core.mail import send_mail
 # Create your views here.
 User = get_user_model()
 
@@ -93,4 +95,29 @@ class CategoryViewSet(viewsets.ModelViewSet):  # Corrected usage of ModelViewSet
             action='updated',
             details=f'Category "{category.name}" was updated.'
         )
-    
+
+class IssueFormView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = ContactFormSerializer(data=request.data)
+        if serializer.is_valid():
+            # Process the form data (e.g., send an email)
+            name = serializer.validated_data['name']
+            email = serializer.validated_data['email']
+            message = serializer.validated_data['message']
+
+            # Example: Send an email
+            subject = f"New Contact Form Submission from {name}"
+            email_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+            try:
+                send_mail(
+                    subject,
+                    email_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    ['codewithlynah.com'],  # Replace with the recipient's email
+                    fail_silently=False,
+                )
+                return Response({"message": "Form submitted successfully."}, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({"error": f"Failed to send email: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

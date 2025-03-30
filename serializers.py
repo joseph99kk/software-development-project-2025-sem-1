@@ -120,4 +120,10 @@ class ActivitySerializer(serializers.ModelSerializer):
         read_only_fields = ['timestamp']
         
 
+
+class IssueFormSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=100)
+    email = serializers.EmailField()
+    message = serializers.CharField(max_length=500)
+
     
