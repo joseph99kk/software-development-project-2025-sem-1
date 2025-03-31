@@ -96,7 +96,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Issue
-        fields = ['id', 'title', 'description', 'department', 'user', 'status', 'created_at', 'updated_at','assigned_to','affected_course','affected_student']
+        fields = ['id', 'title', 'description', 'department', 'category', 'user', 'status', 'created_at', 'updated_at','assigned_to','affected_course','affected_student']
         read_only_fields = ['user', 'status', 'created_at', 'updated_at']
         def validate_title(self, value):
             if len(value) < 10:

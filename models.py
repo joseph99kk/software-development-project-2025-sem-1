@@ -50,7 +50,7 @@ class Issue(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='issues')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE,null=True,blank=True related_name='issues')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_issues')
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='assigned_issues')
     affected_course = models.CharField(max_length=100, blank=True, null=True)
