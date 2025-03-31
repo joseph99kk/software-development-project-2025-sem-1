@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div>
       <StudentDashboard />
-      {/* Pass issues, selectIssue, and notification as props */}
+      {/* Pass issues, selectIssue, and notification as props  */}
       <Dashboard 
         issues={issues} 
         selectIssue={selectIssue} 
