@@ -4,7 +4,7 @@ import "../components/LecturerDashboard.css";
 const LecturerDashboard = () => {
   const [activeSection, setActiveSection] = useState("home"); // This state is for tracking active section
   const [receivedIssues, setReceivedIssues] = useState([]); // This state is for received issues
-  const [resolvedIssues, setResolvedIssues] = useState([]); // State for resolved issues
+  const [resolvedIssues, setResolvedIssues] = useState([]); // This state is for resolved issues
   const [assignedIssues, setAssignedIssues] = useState([]); // State for assigned issues
 
   // Switch between sections
