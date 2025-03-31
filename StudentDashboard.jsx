@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   // Dummy data for profile
   const studentData = {
-    name: "John Doe",
+    name: " ",
     course: "BSc. Computer Science",
     profilePic: "default-profile.png", // To be replaced with actual path
   };
