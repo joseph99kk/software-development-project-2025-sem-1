@@ -1,6 +1,6 @@
 import React from "react";
 
-export default Notification = ({ message }) => {
+export default Notification = ({ message }) =>  {
     return(
         <div>
             <p>{message}</p>
