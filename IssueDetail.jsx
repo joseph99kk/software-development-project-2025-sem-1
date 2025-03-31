@@ -1,6 +1,6 @@
 import React from "react";
 
-function IssueDetail ({ issue }) {
+function IssueDetail ({ issue })  {
     return(
         <div>
             <h3>Issue Details</h3>
