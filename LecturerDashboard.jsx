@@ -12,21 +12,21 @@ const LecturerDashboard = () => {
     setActiveSection(section);
   };
 
-  // Fetch data from backend APIs (replace placeholders with actual endpoints)
+  // Fetch data from backend APIs 
   const fetchReceivedIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_RECEIVED_ISSUES");
+    const response = await fetch("API_ENDPOINT_FOR_RECEIVED_ISSUES");
     const data = await response.json();
     setReceivedIssues(data);
   };
 
   const fetchResolvedIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_RESOLVED_ISSUES");
+    const response = await fetch("API_ENDPOINT_FOR_RESOLVED_ISSUES");
     const data = await response.json();
     setResolvedIssues(data);
   };
 
   const fetchAssignedIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_ASSIGNED_ISSUES");
+    const response = await fetch("API_ENDPOINT_FOR_ASSIGNED_ISSUES");
     const data = await response.json();
     setAssignedIssues(data);
   };
