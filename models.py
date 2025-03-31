@@ -43,7 +43,7 @@ class Issue(models.Model):
         ('medium', 'Medium'),
         ('high', 'High')
     ]
-    Issue_id = models.CharField(max_length=20, unique=True, editable=False)
+    Issue_id = models.CharField(max_length=20, unique=True)  # Unique identifier for the issue   
     title = models.CharField(max_length=200)
     description = models.TextField()
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='issues')
