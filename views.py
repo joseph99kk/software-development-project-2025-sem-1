@@ -77,7 +77,11 @@ class CategoryViewSet(viewsets.ModelViewSet):  # Corrected usage of ModelViewSet
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        category = serializer.save()
+        category = self.request.data.get('category')
+        if not category:
+            return Response({'category': "Category name is required."})
+                            
+        serializer.save(created_by=self.request.user)
         # Log activity for category creation
         Activity.objects.create(
             issue=None,  # Replace with an actual issue instance if applicable
