@@ -79,8 +79,8 @@ const LecturerDashboard = () => {
             Profile Picture
           </div>
           <div className="profile-info">
-            <p id="lecturer-name" className="name">Dr. Jane Doe</p>
-            <p id="lecturer-title" className="degree">Lecturer, Computer Science</p>
+            <p id="lecturer-name" className="name"></p>
+            <p id="lecturer-title" className="degree">Lecturer</p>
           </div>
         </div>
       </header>
