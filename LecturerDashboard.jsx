@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../components/LecturerDashboard.css"; 
 
 const LecturerDashboard = () => {
-  const [activeSection, setActiveSection] = useState("home"); // State to track active section
-  const [receivedIssues, setReceivedIssues] = useState([]); // State for received issues
+  const [activeSection, setActiveSection] = useState("home"); // This state is for tracking active section
+  const [receivedIssues, setReceivedIssues] = useState([]); // This state is for received issues
   const [resolvedIssues, setResolvedIssues] = useState([]); // State for resolved issues
   const [assignedIssues, setAssignedIssues] = useState([]); // State for assigned issues
 
