@@ -79,6 +79,7 @@ class CategoryViewSet(viewsets.ModelViewSet):  # Corrected usage of ModelViewSet
     def perform_create(self, serializer):
         category = self.request.data.get('category')
         if not category:
+            
             return Response({'category': "Category name is required."})
                             
         serializer.save(created_by=self.request.user)
