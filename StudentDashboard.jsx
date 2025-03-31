@@ -5,7 +5,7 @@ import "../components/StudentDashboard.css"
 import { useState } from "react";
 
 const Dashboard = () => {
-  // States for managing active sections and word count
+  // These are states for managing active sections and word count
   const [activeSection, setActiveSection] = useState("home");
   const [wordCount, setWordCount] = useState(0);
 
@@ -13,10 +13,10 @@ const Dashboard = () => {
   const studentData = {
     name: "John Doe",
     course: "BSc. Computer Science",
-    profilePic: "default-profile.png", // Replace with actual path
+    profilePic: "default-profile.png", // To be replaced with actual path
   };
 
-  // Handle switching between sections
+  // Handles switching between sections
   const handleSectionChange = (section) => {
     setActiveSection(section);
   };
