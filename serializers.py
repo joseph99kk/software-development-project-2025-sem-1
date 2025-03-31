@@ -96,8 +96,8 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Issue
-        fields = [ 'title', 'description', 'department', 'category', 'user', 'status', 'created_at', 'updated_at','assigned_to','affected_course','affected_student']
-        read_only_fields = ['user', 'status', 'created_at', 'updated_at']
+        fields = ['Issue_id', 'title', 'description', 'department', 'category', 'user', 'status', 'created_at', 'updated_at','assigned_to','affected_course','affected_student']
+        read_only_fields = ['Issue_id','user', 'status', 'created_at', 'updated_at']
         def validate_title(self, value):
             if len(value) < 10:
                 raise serializers.ValidationError("Title must be at least 10 characters ")
