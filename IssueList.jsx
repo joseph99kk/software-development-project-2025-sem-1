@@ -1,7 +1,7 @@
 import React from "react";
 
-function IssueList({ issues, selectIssue }) {
-    return (
+function IssueList({ issues, selectIssue })  {
+    return  (
         <div>
             <h3>Issue List</h3>
             <ul>
