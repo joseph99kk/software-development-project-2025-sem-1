@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../components/LecturerDashboard.css" 
+import "../components/LecturerDashboard.css"; 
 
 const LecturerDashboard = () => {
   const [activeSection, setActiveSection] = useState("home"); // State to track active section
