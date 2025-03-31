@@ -5,7 +5,7 @@ const LecturerDashboard = () => {
   const [activeSection, setActiveSection] = useState("home"); // This state is for tracking active section
   const [receivedIssues, setReceivedIssues] = useState([]); // This state is for received issues
   const [resolvedIssues, setResolvedIssues] = useState([]); // This state is for resolved issues
-  const [assignedIssues, setAssignedIssues] = useState([]); // State for assigned issues
+  const [assignedIssues, setAssignedIssues] = useState([]); // This state is for assigned issues
 
   // Switch between sections
   const switchSection = (section) => {
