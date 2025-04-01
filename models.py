@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
 from uuid import uuid4
 
-# Custom User model
+# Custom User Model
 class User(AbstractUser):
     email = models.EmailField(unique=True)  # Unique email for authentication
     
