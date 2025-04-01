@@ -2,8 +2,7 @@ from django.urls import path
 from .views import (
     RegistrationView, LoginView, MyTokenObtainPairView, MyTokenRefreshView,
     PasswordResetView, PasswordChangeView,
-    DepartmentListCreateView, DepartmentDetailView,
-    IssueListCreateView, IssueDetailView, ActivityListView, IssueFormView
+    DepartmentListCreateView, DepartmentDetailView,IssueListCreateView, IssueDetailView, ActivityListView, ContactFormView
 )
 
 app_name = 'UNI'
@@ -34,7 +33,7 @@ urlpatterns = [
     path('issues/<int:pk>/', IssueDetailView.as_view(), name='issue_detail'),
 
     # issue submission endpoints...
-    path('api/contact-form/', IssueFormView.as_view(), name='contact-form'),
+    path('api/contact-form/', ContactFormView.as_view(), name='contact-form'),
     
 # Activity endpoints
     path('activities/', ActivityListView.as_view(), name='activity_list'),

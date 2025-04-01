@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
-from .serializers import RegistrationSerializer, LoginSerializer, PasswordResetSerializer, PasswordChangeSerializer, DepartmentSerializer, IssueSerializer, CategorySerializer,ActivitySerializer
+from .serializers import RegistrationSerializer, LoginSerializer, PasswordResetSerializer,PasswordChangeSerializer, DepartmentSerializer, IssueSerializer, CategorySerializer,ActivitySerializer, ContactFormSerializer
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import status
@@ -10,7 +10,6 @@ from rest_framework.views import APIView
 from rest_framework import viewsets  # Correct import for ModelViewSet
 from .models import Department, Issue, Category
 from.permissions import IsOwnerOrStaff
-from .serializers import IssueFormSerializer
 from django.core.mail import send_mail
 # Create your views here.
 User = get_user_model()
@@ -101,7 +100,7 @@ class CategoryViewSet(viewsets.ModelViewSet):  # Corrected usage of ModelViewSet
             details=f'Category "{category.name}" was updated.'
         )
 
-class IssueFormView(APIView):
+class ContactFormView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = ContactFormSerializer(data=request.data)
         if serializer.is_valid():

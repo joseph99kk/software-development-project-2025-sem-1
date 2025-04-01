@@ -121,7 +121,7 @@ class ActivitySerializer(serializers.ModelSerializer):
         
 
 
-class IssueFormSerializer(serializers.Serializer):
+class ContactFormSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
     email = serializers.EmailField()
     message = serializers.CharField(max_length=500)
