@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
+from uuid import uuid4
 
 # Custom User model
 class User(AbstractUser):
@@ -43,7 +44,7 @@ class Issue(models.Model):
         ('medium', 'Medium'),
         ('high', 'High')
     ]
-    Issue_id = models.CharField(max_length=20, unique=True)  # Unique identifier for the issue   
+    Issue_id = models.UUIDFeild(max_length=20, unique=True)  # Unique identifier for the issue   
     title = models.CharField(max_length=200)
     description = models.TextField()
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='issues')
@@ -59,26 +60,15 @@ class Issue(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        # Check if the object is being created (no primary key yet)
-        is_new = self.pk is None
-        if not self.pk:
-            super().save(*args, **kwargs)  # Save the object to generate the primary key
-        if not self.Issue_id:  # Generate Issue_id only if it doesn't already exist
-            self.Issue_id = f"I-{self.pk:05d}"  # Generate a unique Issue ID
-        super().save(*args, **kwargs)  # Save the object again with the Issue_id
-        if is_new: #send email to only new issues
-            subject = f"New Issue Created: {self.title}"
-            message = f"A Issue has been created: \n\nTitle: {self.title}\nDescription: {self.description}"
-            receipient_list = ['codewithlynah@gmail.com']
-            send_mail(
-                subject,
-                message,
-                'codewithlynah@gmail.com',
-                receipient_list,
-                fail_silently=False,
-            )
+        # super().save(*args, **kwargs) to get the pk
+        if not self.Issue_id:  # Generate Issue_id only if it doesn't exist
+            # self.Issue_id = f"I-{self.pk or 0:05d}"
+            self.Issue_id = uuid4()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
+    
 # Registration model
 class Registration(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='registration')
