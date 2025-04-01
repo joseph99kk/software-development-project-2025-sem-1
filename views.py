@@ -126,3 +126,21 @@ class IssueFormView(APIView):
                 return Response({"error": f"Failed to send email: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Add to views.py:
+
+class ActivityListView(ListCreateAPIView):
+    queryset = Activity.objects.all()
+    serializer_class = ActivitySerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        """
+        This view should return a list of all activities,
+        but it can be filtered by issue_id if provided.
+        """
+        queryset = Activity.objects.all()
+        issue_id = self.request.query_params.get('issue_id', None)
+        if issue_id is not None:
+            queryset = queryset.filter(issue_id=issue_id)
+        return queryset
