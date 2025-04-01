@@ -4,7 +4,7 @@ from .views import (
     PasswordResetView, PasswordChangeView,
     DepartmentListCreateView, DepartmentDetailView,
     IssueListCreateView, IssueDetailView,
-    from .views import IssueFormView
+    from .views import IssueFormView,ActivityListView
 )
 
 app_name = 'UNI'
@@ -36,4 +36,7 @@ urlpatterns = [
 
     # issue submission endpoints...
     path('api/contact-form/', IssueFormView.as_view(), name='contact-form'),
+    
+# Activity endpoints
+    path('activities/', ActivityListView.as_view(), name='activity_list'),
 ]
