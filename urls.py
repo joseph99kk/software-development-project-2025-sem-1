@@ -3,7 +3,7 @@ from .views import (
     RegistrationView, LoginView, MyTokenObtainPairView, MyTokenRefreshView,
     PasswordResetView, PasswordChangeView,
     DepartmentListCreateView, DepartmentDetailView,
-    IssueListCreateView, IssueDetailView, ActivityListView
+    IssueListCreateView, IssueDetailView, ActivityListView, IssueFormView
 )
 
 app_name = 'UNI'
