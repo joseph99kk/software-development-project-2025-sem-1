@@ -38,6 +38,8 @@ const Dashboard = () => {
     } else {
       const issueData = {
         title:issueTitle,
+        course_code:courseCode,
+        
       
     }
   };
