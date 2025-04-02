@@ -39,10 +39,9 @@ const Dashboard = () => {
       const issueData = {
         title:issueTitle,
         course_code:courseCode,
-        
-      
+        details:issueDetails,
     }
-  };
+
 
   return (
     <div className="dashboard">
