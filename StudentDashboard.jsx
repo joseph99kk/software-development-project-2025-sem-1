@@ -36,7 +36,9 @@ const Dashboard = () => {
     if (wordCount > 200) {
       alert("Issue description cannot exceed 200 characters. Please revise it.");
     } else {
-      alert("Issue submitted successfully!");
+      const issueData = {
+        title:issueTitle,
+      
     }
   };
 
