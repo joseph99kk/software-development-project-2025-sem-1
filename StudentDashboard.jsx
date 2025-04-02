@@ -58,8 +58,12 @@ try {
           setIssueDetails("");
           setWordCount(0);
         }
-
-
+}
+catch (error) {
+  //Handling error during API request
+  console.error("There was an error while submitting the issue:",error);
+  setError("There was an error while submitting the issue.Please try again later.")
+  setSuccessMessage(""); //Clearing any previous messages.
   return (
     <div className="dashboard">
       {/* Header Section */}
