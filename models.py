@@ -5,13 +5,20 @@ from uuid import uuid4
 
 # Custom User model
 class User(AbstractUser):
+    ROLE_CHOICES = [
+        ('student', 'Student'),
+        ('lecturer', 'Lecturer'),
+        ('admin', 'Admin')
+        ('registrar', 'Registrar'),
+    ]
     email = models.EmailField(unique=True)  # Unique email for authentication
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='student')  # User role
     
     REQUIRED_FIELDS = ['username']  # Username is still required
     USERNAME_FIELD = 'email'  # Use email as the unique identifier for authentication
     
     def __str__(self):
-        return self.email  # Return the email as the string representation
+        return f"{self.email}({self.email})"  # Return the email as the string representation
 
 # Department model
 class Department(models.Model):
@@ -51,7 +58,7 @@ class Issue(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
-    category = models.ForeignKey('Category', on_delete=models.CASCADE,null=True,blank=True related_name='issues')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True ,blank= True related_name='issues')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_issues')
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='assigned_issues')
     affected_course = models.CharField(max_length=100, blank=True, null=True)

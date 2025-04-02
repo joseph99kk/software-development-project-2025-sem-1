@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     RegistrationView, LoginView, MyTokenObtainPairView, MyTokenRefreshView,
     PasswordResetView, PasswordChangeView,
-    DepartmentListCreateView, DepartmentDetailView,IssueListCreateView, IssueDetailView, ActivityListView, ContactFormView
+    DepartmentListCreateView, DepartmentDetailView, IssueListCreateView, IssueDetailView, ActivityListView, ContactFormView
 )
 
 app_name = 'UNI'

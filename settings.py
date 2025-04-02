@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j(0=zwadfn&ep2-&xaq#_+9r4qwg&5sm^*h1#j*#%np+8!j5x=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'UNI',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
 
 ROOT_URLCONF = 'MUK.urls'
 
@@ -72,6 +76,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'MUK.wsgi.application'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173', # React app running on localhost
+    
+]
+
+CORS_ALLOW_CREDENTIALS = True  # Allow cookies to be included in CORS requests
+
 
 
 # Database
