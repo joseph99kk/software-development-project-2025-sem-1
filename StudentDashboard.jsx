@@ -41,6 +41,14 @@ const Dashboard = () => {
         course_code:courseCode,
         details:issueDetails,
     }
+try {
+  //Sending POST request to Django API
+  const response = await axios.post("http://129.205.24.61.161.8000/api/issues", issueData, {
+    headers: {
+      "Content-Type: "application/json",
+    },
+  });
+  
 
 
   return (
