@@ -48,7 +48,16 @@ try {
       "Content-Type: "application/json",
     },
   });
-  
+  if (response.status === 201) {
+          // Handle successful submission
+          setSuccessMessage("Issue submitted successfully!");
+          setError("");  // Clearing any previous errors
+          // Clearing form after submission
+          setIssueTitle("");
+          setCourseCode("");
+          setIssueDetails("");
+          setWordCount(0);
+        }
 
 
   return (
