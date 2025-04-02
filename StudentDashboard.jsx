@@ -27,6 +27,7 @@ const Dashboard = () => {
     const text = e.target.value;
     const letters = text.split("").filter((char) => /[a-zA-Z]/.test(char));
     setWordCount(letters.length);
+    setIssueDetails(text);
   };
 
   // Handle form submission with validation
