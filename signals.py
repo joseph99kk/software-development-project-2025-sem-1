@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.html import strip_tags
 from .models import User
-
+# automatically sends a welcome email whenever a new user is created in the system. 
 @receiver(post_save, sender=User)
 def send_registration_email(sender, instance, created, **kwargs):
     if created:  # create a user first to send email
