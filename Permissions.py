@@ -11,11 +11,8 @@ class IsOwnerOrStaff(permissions.BasePermission):
             return True
 
         # Check for ownership or staff permission
-        user = request.user
-        if hasattr(obj, 'created_by'):
-            return obj.created_by == user or user.is_staff
-        elif hasattr(obj, 'user'):
-            return obj.user == user or user.is_staff
+         if any(getattr(obj, field, None) == request.user for field in self.ownership_fields):
+            return True
 
         # Deny permission if no ownership attribute is found
         return False
