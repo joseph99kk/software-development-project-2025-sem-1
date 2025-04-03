@@ -4,6 +4,7 @@ import StudentDashboard from "./pages/StudentDashboard"; // Student Dashboard co
 import LecturerDashboard from "./pages/LecturerDashboard"; // Lecturer Dashboard component
 import AcademicRegistrarDashboard from "./pages/AcademicRegistrarDashboard"; // Academic Registrar Dashboard component
 import Dashboard from "./components/Dashboard"; 
+import Login from "./pages/Login";
 
 
 const App = () => {
