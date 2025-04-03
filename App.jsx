@@ -28,7 +28,8 @@ const App = () => {
       <div>
         {/* Define Routes for Dashboards */}
         <Routes>
-          { <Route path="/student" element={<StudentDashboard />} /> }
+          <Route path="/student" element={<StudentDashboard />} /> 
+          <Route path="/Login" element={<Login /> } />
           <Route path="/lecturer" element={<LecturerDashboard />} /> 
           <Route path="/academic registrar" element={<AcademicRegistrarDashboard />} />
         </Routes>
