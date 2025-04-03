@@ -5,6 +5,7 @@ from rest_framework.validators import UniqueValidator
 from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
+#class registration
 
 class RegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
