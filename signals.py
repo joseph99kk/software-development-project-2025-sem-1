@@ -27,7 +27,7 @@ def send_registration_email(sender, instance, created, **kwargs):
             send_mail(
                 subject=subject,
                 message=strip_tags(html_message),  # Plain text version
-                html_message=html_message,  # HTML version
+                html_message=html_message,  # 
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[instance.email],
                 fail_silently=False,  # Raises an error if the email fails to send
