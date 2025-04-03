@@ -1,7 +1,21 @@
 from django.shortcuts import render
-from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    CreateAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 from rest_framework.permissions import IsAuthenticated
-from .serializers import RegistrationSerializer, LoginSerializer, PasswordResetSerializer,PasswordChangeSerializer, DepartmentSerializer, IssueSerializer, CategorySerializer,ActivitySerializer, ContactFormSerializer
+from .serializers import (
+    RegistrationSerializer,
+    LoginSerializer,
+    PasswordResetSerializer,
+    PasswordChangeSerializer,
+    DepartmentSerializer,
+    IssueSerializer,
+    CategorySerializer,
+    ActivitySerializer,
+    ContactFormSerializer,
+)
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import status
@@ -9,10 +23,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets  # Correct import for ModelViewSet
 from .models import Department, Issue, Category, Activity
-from.permissions import IsOwnerOrStaff
+from .permissions import IsOwnerOrStaff
 from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 User = get_user_model()
+
 
 class RegistrationView(CreateAPIView):
     queryset = User.objects.all()
@@ -20,7 +36,13 @@ class RegistrationView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
-        return Response({"message": "User registered successfully", "user": response.data}, status=status.HTTP_201_CREATED)
+        return Response(
+            {
+                "message": "User registered successfully",
+                "user": response.data,
+            },
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class LoginView(CreateAPIView):
@@ -40,7 +62,10 @@ class PasswordResetView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = PasswordResetSerializer(data=request.data)
         if serializer.is_valid():
-            return Response({"message": "Password reset email sent."}, status=status.HTTP_200_OK)
+            return Response(
+                {"message": "Password reset email sent."},
+                status=status.HTTP_200_OK
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -71,7 +96,7 @@ class DepartmentDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
-class IssueListCreateView(ListCreateAPIView):  #API endpoints to submit issues
+class IssueListCreateView(ListCreateAPIView):  # API endpoints to submit issues
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
     permission_classes = [IsAuthenticated]
@@ -128,22 +153,29 @@ class ContactFormView(APIView):
 
             # Example: Send an email
             subject = f"New Contact Form Submission from {name}"
-            email_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+            email_message = (
+                f"Name: {name}\n"
+                f"Email: {email}\n\n"
+                f"Message:\n{message}"
+            )
             try:
                 send_mail(
                     subject,
                     email_message,
                     settings.DEFAULT_FROM_EMAIL,
-                    ['codewithlynah.com'],  # Replace with the recipient's email
+                    ['codewithlynah.com'], 
                     fail_silently=False,
                 )
-                return Response({"message": "Form submitted successfully."}, status=status.HTTP_200_OK)
+                return Response({"message": "Form submitted successfully."}, 
+                                status=status.HTTP_200_OK)
             except Exception as e:
-                return Response({"error": f"Failed to send email: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response({"error": f"Failed to send email: {str(e)}"},
+                                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # Add to views.py:
+
 
 class ActivityListView(ListCreateAPIView):
     queryset = Activity.objects.all()
