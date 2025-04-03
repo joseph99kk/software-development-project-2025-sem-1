@@ -7,7 +7,8 @@ from .models import User
 
 @receiver(post_save, sender=User)
 def send_registration_email(sender, instance, created, **kwargs):
-    if created:  # Send email only when a new user is created
+    if created:  # create a user first to send email
+        
         try:
             subject = "Welcome to the System"
             message = (
