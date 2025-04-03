@@ -30,7 +30,7 @@ const Login = () => {
         alert('Login successful!');
 
         // Store the role and other information (e.g., token)
-        localStorage.setItem('userRole', user.role);
+        localStorage.setItem('authToken, response.data.token);
 
         // Redirect based on the role
         if (user.role === 'student') {
