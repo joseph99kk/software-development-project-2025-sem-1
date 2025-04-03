@@ -1,0 +1,87 @@
+.register-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: purple; /* Purple color for Register heading */
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  select {
+    background-color: #fff; /* White background for the dropdown */
+    padding-right: 30px; /* Space for the dropdown icon */
+  }
+  
+  .custom-dropdown {
+    position: relative;
+  }
+  
+  .dropdown-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #888;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  /* Hide the default dropdown arrow */
+select {
+    -webkit-appearance: none;  /* Removes the default dropdown arrow in Safari */
+    -moz-appearance: none;     /* Removes the default dropdown arrow in Firefox */
+    appearance: none;          /* Removes the default dropdown arrow in Chrome and others */
+    padding-right: 30px;       /* Space for the custom dropdown icon */
+  }
+  
+  .custom-dropdown {
+    position: relative;
+  }
+  
+  .dropdown-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #888;
+  }
+  
