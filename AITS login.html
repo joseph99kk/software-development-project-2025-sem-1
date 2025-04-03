@@ -1,25 +1,58 @@
 <!DOCTYPE html>
-<html lang ="en">
-	<head>
-		<title>AITS LOGIN</title>
-	<head>
-	<body style="color:green;text-align:center">
-		<h1>
-			MAKERERE UNIVERSITY ACADEMIC ISSUES TRACKING SYSTEM
-		</h1>
-		<h2>
-			Please enter your details to log in!
-		</h2>
- 		<form>
-			<div>
-				Student Registration number: <input type="text" placeholder="Student Registration number"name="Student Registration number">
-			</div>
-			<div>
-				Password:<input type="password" placeholder="Password" name="Password">
-			</div>
-			<div>
-				<input type="submit">
-			</div>
-		</form>
-	<body>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AITS LOGIN</title>
+    <style>
+        body {
+            color: green;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>MAKERERE UNIVERSITY ACADEMIC ISSUES TRACKING SYSTEM</h1>
+    <h2>Please enter your details to log in!</h2>
+
+    <form action="login.php" method="POST">
+        <div>
+            <label for="student_reg_number">Student Registration Number:</label>
+            <input type="text" id="student_reg_number" name="student_reg_number" placeholder="Enter your registration number" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+
+</body>
+</html>
