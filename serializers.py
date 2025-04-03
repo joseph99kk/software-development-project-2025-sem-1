@@ -19,9 +19,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         ]
         
     def validate_password(self, value):
-        """
-        Helper function to validate password complexity
-        """
+        
         if len(value) < 8:
             raise serializers.ValidationError(_("Password must be at least 8 characters"))
         if not any(char.isdigit() for char in value):
