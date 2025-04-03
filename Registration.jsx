@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../components/Register.css"; // Including the CSS file
+import "../components/Register.css"; //  CSS file
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +8,12 @@ const Register = () => {
   const [studentNumber, setStudentNumber] = useState("");
   const [course, setCourse] = useState("");
   const [year, setYear] = useState("");
+  const [staffId, setStaffId] = useState("");
+  const [college, setCollege] = useState("");
+  const [school, setSchool] = useState("");
+  const [department, setDepartment] = useState("");
+  const [officeLocation, setOfficeLocation] = useState(""); // For academic registrar
+  const [officeHours, setOfficeHours] = useState(""); // For academic registrar
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +25,12 @@ const Register = () => {
       studentNumber,
       course,
       year,
+      staffId,
+      college,
+      school,
+      department,
+      officeLocation,
+      officeHours,
     });
   };
 
@@ -52,19 +64,25 @@ const Register = () => {
 
         <div className="input-group">
           <label htmlFor="role">Role:</label>
-          <select
-            id="role"
-            name="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            required
-          >
-            <option value="student">Student</option>
-            <option value="lecturer">Lecturer</option>
-            <option value="academic_registrar">Academic Registrar</option>
-          </select>
+          <div className="custom-dropdown">
+            <select
+              id="role"
+              name="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+            >
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="academic_registrar">Academic Registrar</option>
+            </select>
+            <div className="dropdown-icon">
+              <span>&#9662;</span> {/* Down arrow icon */}
+            </div>
+          </div>
         </div>
 
+        {/* Display student fields if role is student */}
         {role === "student" && (
           <>
             <div className="input-group">
@@ -99,6 +117,100 @@ const Register = () => {
                 name="year"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
+                required
+              />
+            </div>
+          </>
+        )}
+
+        {/* Display lecturer fields if role is lecturer */}
+        {role === "lecturer" && (
+          <>
+            <div className="input-group">
+              <label htmlFor="staffId">Staff ID:</label>
+              <input
+                type="text"
+                id="staffId"
+                name="staffId"
+                value={staffId}
+                onChange={(e) => setStaffId(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="college">College:</label>
+              <input
+                type="text"
+                id="college"
+                name="college"
+                value={college}
+                onChange={(e) => setCollege(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="school">School:</label>
+              <input
+                type="text"
+                id="school"
+                name="school"
+                value={school}
+                onChange={(e) => setSchool(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="department">Department:</label>
+              <input
+                type="text"
+                id="department"
+                name="department"
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                required
+              />
+            </div>
+          </>
+        )}
+
+        {/* Display academic registrar fields if role is academic_registrar */}
+        {role === "academic_registrar" && (
+          <>
+            <div className="input-group">
+              <label htmlFor="staffId">Staff ID:</label>
+              <input
+                type="text"
+                id="staffId"
+                name="staffId"
+                value={staffId}
+                onChange={(e) => setStaffId(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="officeLocation">Office Location:</label>
+              <input
+                type="text"
+                id="officeLocation"
+                name="officeLocation"
+                value={officeLocation}
+                onChange={(e) => setOfficeLocation(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="officeHours">Office Hours:</label>
+              <input
+                type="text"
+                id="officeHours"
+                name="officeHours"
+                value={officeHours}
+                onChange={(e) => setOfficeHours(e.target.value)}
                 required
               />
             </div>
