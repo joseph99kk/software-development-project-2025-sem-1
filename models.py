@@ -7,8 +7,7 @@ from uuid import uuid4
 
 # Custom User model
 class User(AbstractUser):
-    ROLES_CHOICES = [         #Defines a list of roles that a user can have. 
-                                          #Each role is a tuple with a value and a human-readable name.
+    ROLES_CHOICES = [      
         ('admin', 'Admin'),
         ('lecturer', 'Lecturer'),
         ('student', 'Student'),
