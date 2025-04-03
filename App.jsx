@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Dashboard from "./components/Dashboard";
-// import IssueForm from "./components/IssueForm";
-import IssueDetail from "./components/IssueDetail";
-import Notification from "./components/Notification";
-import StudentDashboard from "./pages/StudentDashboard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import React Router
+import StudentDashboard from "./pages/StudentDashboard"; // Student Dashboard component
+import LecturerDashboard from "./pages/LecturerDashboard"; // Lecturer Dashboard component
+import AcademicRegistrarDashboard from "./pages/AcademicRegistrarDashboard"; // Academic Registrar Dashboard component
+import Dashboard from "./components/Dashboard"; 
+
 
 const App = () => {
   const [issues, setIssues] = useState([]);
@@ -22,18 +23,26 @@ const App = () => {
   };
 
   return (
-    <div>
-      <StudentDashboard />
-      {/* Pass issues, selectIssue, and notification as props  */}
-      <Dashboard 
-        issues={issues} 
-        selectIssue={selectIssue} 
-        notification={notification} 
-      />
-      {/* <IssueForm addIssue={addIssue} /> */}
-      {/* {selectedIssue && <IssueDetail issue={selectedIssue} />} */}
-      {/* <Notification message={notification} /> */}
-    </div>
+    <Router>
+      <div>
+        {/* Define Routes for Dashboards */}
+        <Routes>
+          { <Route path="/student" element={<StudentDashboard />} /> }
+          <Route path="/lecturer" element={<LecturerDashboard />} /> 
+          <Route path="/academic registrar" element={<AcademicRegistrarDashboard />} />
+        </Routes>
+
+        {/* Existing Dashboard Components  */}
+        <Dashboard 
+          issues={issues} 
+          selectIssue={selectIssue} 
+          notification={notification} 
+        />
+        {/* <IssueForm addIssue={addIssue} /> */}
+        {/* {selectedIssue && <IssueDetail issue={selectedIssue} />} */}
+        {/* <Notification message={notification} /> */}
+      </div>
+    </Router>
   );
 };
 
