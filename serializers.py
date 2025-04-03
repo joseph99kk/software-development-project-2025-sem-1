@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
-# Common Password Validation Function
+
 def validate_password_strength(password):
     """Validates password security requirements."""
     if len(password) < 8:
