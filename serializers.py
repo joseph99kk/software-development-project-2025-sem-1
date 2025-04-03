@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
-from .models import Department, Issue,Category, Registration,Activity# Import  model
+from .models import Department, Issue,Category, Registration,Activity
 
 User = get_user_model()
 

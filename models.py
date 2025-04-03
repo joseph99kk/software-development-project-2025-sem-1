@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
 from uuid import uuid4
+from django.conf import settings
 
 # Custom User model
 class User(AbstractUser):
@@ -67,11 +68,22 @@ class Issue(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        # super().save(*args, **kwargs) to get the pk
+        is_new = self.pk is None  # Check if the object is new (not yet saved)
+        
         if not self.Issue_id:  # Generate Issue_id only if it doesn't exist
             # self.Issue_id = f"I-{self.pk or 0:05d}"
             self.Issue_id = uuid4()
         super().save(*args, **kwargs)
+        if is_new:
+            
+            # Send email notification to the user
+            send_mail(
+                'Issue Created',
+                f'Your issue "{self.title}" has been created successfully.',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[self.user.email],
+                fail_silently=False,
+            )
 
     def __str__(self):
         return self.title

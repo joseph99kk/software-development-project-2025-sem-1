@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j(0=zwadfn&ep2-&xaq#_+9r4qwg&5sm^*h1#j*#%np+8!j5x='
+SECRET_KEY = (
+    'django-insecure-j(0=zwadfn&ep2-&xaq#_+9r4qwg&5sm^*h1#j*#%np+8!j5x='
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,16 +104,27 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.NumericPasswordValidator'
+        ),
     },
 ]
 
@@ -141,8 +154,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',#testinf login sessions
-        'rest_framework.authentication.BasicAuthentication',#testing with postman
+        'rest_framework.authentication.SessionAuthentication',  #login
+        'rest_framework.authentication.BasicAuthentication',
+        # testing with postman
     ),
 }
 
@@ -156,7 +170,7 @@ AUTH_USER_MODEL = 'UNI.User'
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Use SMTP backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Use SMTP 
 EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
 EMAIL_PORT = 587  # Port for TLS
 EMAIL_USE_TLS = True  # Use TLS for secure connection
