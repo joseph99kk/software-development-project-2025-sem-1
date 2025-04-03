@@ -1,26 +1,38 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
+from django.conf import settings
 from uuid import uuid4
 
-# Custom User Model
+
+# Custom User model
 class User(AbstractUser):
+    ROLES_CHOICES = [
+        ('admin', 'Admin'),
+        ('lecturer', 'Lecturer'),
+        ('student', 'Student'),
+        ('registrar', 'Registrar'),
+    ]
     email = models.EmailField(unique=True)  # Unique email for authentication
-    
+    role = models.CharField(max_length=20, choices=ROLES_CHOICES, default='student')
+
     REQUIRED_FIELDS = ['username']  # Username is still required
-    USERNAME_FIELD = 'email'  # Use email as the unique identifier for authentication
-    
+    USERNAME_FIELD = 'email'  # Use email as the unique identifier for auth
+
     def __str__(self):
-        return self.email  # Return the email as the string representation
+        return f"{self.email} ({self.role})"
+
 
 # Department model
 class Department(models.Model):
-    name = models.CharField(max_length=100, unique=True)  # Unique name for the department
-    description = models.TextField(blank=True, null=True)  # Optional description of the department
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True, null=True)  # Optional
 
     def __str__(self):
-        return self.name  # Return the name as the string representation
-    
+        return self.name
+
+
+# Category model
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     color = models.CharField(max_length=50)
@@ -34,41 +46,46 @@ class Category(models.Model):
 
 # Issue model
 class Issue(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('in_progress', 'In Progress'),
-        ('resolved', 'Resolved')
-    ]
-    PRIORITY_CHOICES = [
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High')
-    ]
-    Issue_id = models.UUIDFeild(max_length=20, unique=True)  # Unique identifier for the issue   
+    issue_id = models.UUIDField(default=uuid4, unique=True, editable=False)
     title = models.CharField(max_length=200)
     description = models.TextField()
+    course_code = models.CharField(max_length=100, blank=True, null=True)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='issues')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues')
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
-    category = models.ForeignKey('Category', on_delete=models.CASCADE,null=True,blank=True related_name='issues')
+    status = models.CharField(
+        max_length=20,
+        choices=[('pending', 'Pending'), ('in_progress', 'In Progress'), ('resolved', 'Resolved')],
+        default='pending'
+    )
+    priority = models.CharField(
+        max_length=20,
+        choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')],
+        default='medium'
+    )
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='issues')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_issues')
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='assigned_issues')
-    affected_course = models.CharField(max_length=100, blank=True, null=True)
-    affected_student = models.CharField(max_length=100, blank=True, null=True)
+    affected_course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, blank=True, related_name='affected_issues')
+    affected_student = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='affected_issues')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        # super().save(*args, **kwargs) to get the pk
-        if not self.Issue_id:  # Generate Issue_id only if it doesn't exist
-            # self.Issue_id = f"I-{self.pk or 0:05d}"
-            self.Issue_id = uuid4()
+        is_new = self.pk is None  # Check if the object is new
         super().save(*args, **kwargs)
+        if is_new:
+            send_mail(
+                'Issue Created',
+                f'Your issue "{self.title}" has been created successfully.',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[self.user.email],
+                fail_silently=False,
+            )
 
     def __str__(self):
         return self.title
-    
+
+
 # Registration model
 class Registration(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='registration')
@@ -77,6 +94,8 @@ class Registration(models.Model):
     def __str__(self):
         return f"Registration for {self.user.email}"
 
+
+# Activity Log model
 class Activity(models.Model):
     ACTION_CHOICES = [
         ('created', 'Created'),
@@ -88,13 +107,13 @@ class Activity(models.Model):
     action = models.CharField(max_length=50, choices=ACTION_CHOICES)
     details = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    class Meta:
-        verbose_name_plural="Activities"
-        ordering = ['-timestamp']
-    def __str__(self):
-        
-            return f"{self.action} by {self.user.username} on {self.timestamp}"
-        
-    
 
-    
+    class Meta:
+        verbose_name_plural = "Activities"
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"{self.action} by {self.user.username} on {self.timestamp}"
+
+
+
