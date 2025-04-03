@@ -111,21 +111,16 @@ class IssueDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwnerOrStaff]
 
 
-class CategoryViewSet(viewsets.ModelViewSet):  
+class CategoryViewSet(viewsets.ModelViewSet):   
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        category = self.request.data.get('category')
-        if not category:
-            
-            return Response({'category': "Category name is required."})
-                            
-        serializer.save(created_by=self.request.user)
+        category = serializer.save()
         # Log activity for category creation
         Activity.objects.create(
-            issue=None,  # Replace with an actual issue instance if applicable
+            issue=None,  # No associated issue for category creation
             user=self.request.user,
             action='created',
             details=f'Category "{category.name}" was created.'
@@ -135,7 +130,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
         category = serializer.save()
         # Log activity for category update
         Activity.objects.create(
-            issue=None,  # Replace with an actual issue instance if applicable
+            issue=None,  # No associated issue for category update
             user=self.request.user,
             action='updated',
             details=f'Category "{category.name}" was updated.'
@@ -163,7 +158,7 @@ class ContactFormView(APIView):
                     subject,
                     email_message,
                     settings.DEFAULT_FROM_EMAIL,
-                    ['codewithlynah.com'], 
+                    ['codewithlynah@gmail.com'], 
                     fail_silently=False,
                 )
                 return Response({"message": "Form submitted successfully."}, 
