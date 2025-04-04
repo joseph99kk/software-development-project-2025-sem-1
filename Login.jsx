@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import "../components/Login.css";
 
 const Login = () => {
@@ -6,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault(); // Prevents the form from refreshing the page
 
     // Simple email and password validation
@@ -15,36 +16,36 @@ const Login = () => {
       return;
     }
 
-    // Mock API call to validate user and get the role (replace with actual API call)
-    setTimeout(() => {
-      const mockUsers = [
-        { email: 'student@example.com', password: 'password123', role: 'student' },
-        { email: 'lecturer@example.com', password: 'password123', role: 'lecturer' },
-        { email: 'registrar@example.com', password: 'password123', role: 'academic_registrar' },
-      ];
+    try {
+      // Make an API call to validate user credentials
+      const response = await axios.post('https://mercylina.pythonanywhere.com/api/login/', {
+        email,
+        password,
+      });
 
-      const user = mockUsers.find((u) => u.email === email && u.password === password);
+      // Assuming the API returns a token and role
+      const { token, role } = response.data;
 
-      if (user) {
-        setErrorMessage('');
-        alert('Login successful!');
 
-        // Store the role and other information (e.g., token)
-        localStorage.setItem('authToken, response.data.token);
+      console.log(token, role); // Log the token and role for debugging
 
-        // Redirect based on the role
-        if (user.role === 'student') {
-          window.location.href = '/student-dashboard';  // Redirect to student dashboard
-        } else if (user.role === 'lecturer') {
-          window.location.href = '/lecturer-dashboard';  // Redirect to lecturer dashboard
-        } else if (user.role === 'academic_registrar') {
-          window.location.href = '/registrar-dashboard';  // Redirect to registrar dashboard
-        }
-      } else {
-        // Invalid login credentials
-        setErrorMessage('Invalid credentials. Please try again.');
+      // Store the token in localStorage
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userRole', role); // Store the user role
+      localStorage.setItem('email', response.data.user.email); // Store the email
+
+      // Redirect based on the role
+      if (role === 'student') {
+        window.location.href = '/student'; // Redirect to student dashboard
+      } else if (role === 'lecturer') {
+        window.location.href = '/lecturer'; // Redirect to lecturer dashboard
+      } else if (role === 'academic_registrar') {
+        window.location.href = '/academic-registrar'; // Redirect to registrar dashboard
       }
-    }, 1000); // Simulate network delay (remove this in production)
+    } catch (error) {
+      console.error('Login failed:', error);
+      setErrorMessage('Invalid credentials. Please try again.');
+    }
   };
 
   return (
@@ -81,3 +82,4 @@ const Login = () => {
 };
 
 export default Login;
+
