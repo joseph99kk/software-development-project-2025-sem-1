@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../components/Register.css"; //  CSS file
+import api from "../components/AxiosInstance"; // Import Axios
+import "../components/Register.css"; // CSS file
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -15,10 +16,10 @@ const Register = () => {
   const [officeLocation, setOfficeLocation] = useState(""); // For academic registrar
   const [officeHours, setOfficeHours] = useState(""); // For academic registrar
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (send to API or validate)
-    console.log({
+
+    const formData = {
       email,
       password,
       role,
@@ -31,7 +32,19 @@ const Register = () => {
       department,
       officeLocation,
       officeHours,
-    });
+    };
+
+    try {
+      formData["confirm_password"] = password; // Assuming confirm password is same as password
+
+      console.log("Form Data:", formData); // Log the form data for debugging
+      const response = await api.post("register/", formData);
+      console.log("Registration successful:", response.data);
+      alert("Registration successful!");
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("Registration failed. Please try again.");
+    }
   };
 
   return (
@@ -224,3 +237,4 @@ const Register = () => {
 };
 
 export default Register;
+
