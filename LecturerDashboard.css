@@ -1,0 +1,148 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.header {
+    background-color: #4a148c;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.nav-btn {
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-btn:hover {
+    color: #ffc107;
+}
+
+.nav-btn.active {
+    border-bottom: 2px solid #ffc107;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #d1c4e9;
+    color: #4a148c;
+    font-size: 0.7em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.profile-info {
+    text-align: right;
+}
+
+.name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.degree {
+    font-size: 0.9em;
+    color: #d1c4e9;
+    margin: 0;
+}
+
+.content {
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Issue List Styling */
+.issue-list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #4a148c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+footer a {
+    color: #ffc107;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+/* Make the dashboard span the full height of the viewport */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the dashboard takes up at least the height of the viewport */
+    margin: 0;
+}
+
+/* Make the content area flexible */
+.content {
+    flex: 1; /* Ensures the content section grows to fill space, pushing the footer down */
+}
+
+/* Footer styles */
+footer {
+    background-color: #4a148c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
