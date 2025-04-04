@@ -13,31 +13,31 @@ const AcademicRegistrarDashboard = () => {
 
   // Fetching data from backend APIs
   const fetchReceivedIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_RECEIVED_ISSUES");
+    const response = await fetch("https://mercylina.pythonanywhere.com/");
     const data = await response.json();
     setReceivedIssues(data);
   };
 
   const fetchResolvedIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_RESOLVED_ISSUES");
+    const response = await fetch("https://mercylina.pythonanywhere.com");
     const data = await response.json();
     setResolvedIssues(data);
   };
 
   const fetchAssignedIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_ASSIGNED_ISSUES");
+    const response = await fetch("https://mercylina.pythonanywhere.com/");
     const data = await response.json();
     setAssignedIssues(data);
   };
 
   const fetchPendingIssues = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_PENDING_ISSUES");
+    const response = await fetch("https://mercylina.pythonanywhere.com/");
     const data = await response.json();
     setPendingIssues(data);
   };
 
   const fetchAvailableLecturers = async () => {
-    const response = await fetch("YOUR_API_ENDPOINT_FOR_LECTURERS");
+    const response = await fetch("https://mercylina.pythonanywhere.com/");
     const data = await response.json();
     setAvailableLecturers(data);
   };
