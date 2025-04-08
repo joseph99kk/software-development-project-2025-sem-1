@@ -202,9 +202,9 @@ footer a:hover {
     border-radius: 10px;
 }
 
-/* ===================== */
+
 /* Responsive Design */
-/* ===================== */
+
 @media (max-width: 768px) {
     .header,
     .profile {
