@@ -6,7 +6,7 @@ const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [wordCount, setWordCount] = useState(0);
 
-  // Form State 
+  // Form State variable
 
   const [issueTitle, setIssueTitle] = useState("");
   const [courseCode, setCourseCode] = useState("");
