@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../components/StudentDashboard.css";
-import axios from "../components/AxiosInstance"; // Importing axios for API requests
+import axios from "../components/AxiosInstance"; 
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("home");
