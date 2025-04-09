@@ -29,7 +29,7 @@ const Dashboard = () => {
     setIssueDetails(text);
   };
 
-  // Fetch  an issue using useEffect
+  // Fetch   issue using useEffect
   useEffect(() => {
     const fetchIssues = async () => {
       try {
