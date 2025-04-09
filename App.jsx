@@ -51,3 +51,10 @@ const Dashboard = () => {
       return;
     }
 
+     const issueData = {
+      title: issueTitle,
+      course_code: courseCode,
+      description: issueDetails,
+      email: localStorage.getItem("email"),
+    };
+
