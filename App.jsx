@@ -16,7 +16,7 @@ const Dashboard = () => {
   const studentData = {
     name: localStorage.getItem("name") || "Student Name",
     course: "BSc. Computer Science",
-    profilePic: "default-profile.png", // Should ideally be  real image URL
+    profilePic: "default-profile.png", // Should ideally be a real image URL
   };
 
   const handleSectionChange = (section) => {
