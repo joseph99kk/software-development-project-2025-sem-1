@@ -3,9 +3,9 @@ import "../components/AcademicRegistrarDashboard.css";
 
 const AcademicRegistrarDashboard = () => {
   const [activeSection, setActiveSection] = useState("home"); // State to track active section
-  const [receivedIssues, setReceivedIssues] = useState([]); // State for received issues
-  const [resolvedIssues, setResolvedIssues] = useState([]); // State for resolved issues
-  const [assignedIssues, setAssignedIssues] = useState([]); // State for assigned issues
+  const [receivedIssues, setReceivedIssues] = useState([]); // State for  a received issue
+  const [resolvedIssues, setResolvedIssues] = useState([]); // State for a resolved issue
+  const [assignedIssues, setAssignedIssues] = useState([]); // State for an assigned issue
   const [pendingIssues, setPendingIssues] = useState([]); // State for pending issues
   const [availableLecturers, setAvailableLecturers] = useState([]); // State for available lecturers
   const [selectedLecturer, setSelectedLecturer] = useState(""); // State for selected lecturer
