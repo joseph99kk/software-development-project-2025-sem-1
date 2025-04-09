@@ -62,7 +62,9 @@ const Dashboard = () => {
       setSuccessMessage("");
       setError("");
 
-      const response = await axios.post(
+      const response = await axios.post(         //sending a POST request to your Django backend API to submit a new issue.
+
+
         "https://mercylina.pythonanywhere.com/api/issues/create/",
         issueData,
         {
