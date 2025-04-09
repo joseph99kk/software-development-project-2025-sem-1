@@ -39,3 +39,15 @@ const Dashboard = () => {
         console.error("Failed to fetch issues:", err);
       }
     };
+
+    fetchIssues();
+  }, []);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    if (wordCount > 200) {
+      alert("Issue description cannot exceed 200 characters. Please revise it.");
+      return;
+    }
+
