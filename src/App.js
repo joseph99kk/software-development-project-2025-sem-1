@@ -7,6 +7,7 @@ import LecturerDashboard from './LecturerDashboard';
 import RegistrarDashboard from './RegistrarDashboard';
 import Register from './Register';
 import Login from './Login';
+import WelcomePage from './welcomepage';
 function App() {
   return (
     <Router>
