@@ -27,8 +27,8 @@ function App() {
         <Route path="/" element={<IssueForm />} />
         <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
         <Route path="/registrar-dashboard" element={<RegistrarDashboard />} />
-        <Route path="/register" element={<Register/>} />  
-        <Route path="/login" element={<Login/>} />
+        <Route path="/student-dashboard" element={<StudentDashboard/>} />
+  
       </Routes>
     </div>
     </Router>
