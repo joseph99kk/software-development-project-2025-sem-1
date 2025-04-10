@@ -31,8 +31,8 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="username"
-          placeholder="Username"
+          name="email"
+          placeholder="email"
           onChange={handleChange}
           required
         />
