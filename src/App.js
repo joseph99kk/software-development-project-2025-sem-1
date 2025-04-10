@@ -17,12 +17,12 @@ function App() {
       </header>
       <nav>
         <ul>  
-          <li><Link to="/register">Register</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/">Issue Form</Link></li>
+          <li><Link to="/welcome-page"></Link></li>
+          
         </ul>
       </nav>
       <Routes>
+        <Route path="/welcome-page" element={<WelcomePage />} />
         <Route path="/" element={<IssueForm />} />
         <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
         <Route path="/registrar-dashboard" element={<RegistrarDashboard />} />
