@@ -17,9 +17,9 @@ function App() {
       </header>
       <nav>
         <ul>  
-          <li><Link to="/">Submit Issue</Link></li>
-          <li><Link to="/lecturer-dashboard">Lecturer Dashboard</Link></li>
           <li><Link to="/register">Register</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/">Issue Form</Link></li>
         </ul>
       </nav>
       <Routes>
