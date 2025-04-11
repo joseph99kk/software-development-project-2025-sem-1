@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -11,28 +12,34 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate login and role retrieval (replace with actual API call)
-    const mockResponse = { role: 'student' }; // Replace with actual role from backend
     console.log('Logging in:', formData);
 
-    // Redirect based on role
-    if (mockResponse.role === 'student') {
-      navigate('/student-dashboard');
-    } else if (mockResponse.role === 'registrar') {
-      navigate('/registrar-dashboard');
-    } else if (mockResponse.role === 'lecturer') {
-      navigate('/lecturer-dashboard');
+    // Simulate backend response
+    const mockResponse = { success: true, role: 'student' }; // Replace with actual API call
+
+    if (mockResponse.success) {
+      if (mockResponse.role === 'student') {
+        navigate('/student-dashboard');
+      } else if (mockResponse.role === 'registrar') {
+        navigate('/registrar-dashboard');
+      } else if (mockResponse.role === 'lecturer') {
+        navigate('/lecturer-dashboard');
+      }
+    } else {
+      alert('Invalid username or password. Please try again.');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login-dashboard">
+      <h1>Login</h1>
+      <p className="login-description">Please enter your credentials here.</p>
+      <form onSubmit={handleSubmit} className="login-form">
         <input
-          type="text"
+          type="email"
           name="email"
           placeholder="email"
+          value={formData.username}
           onChange={handleChange}
           required
         />
@@ -40,6 +47,7 @@ function Login() {
           type="password"
           name="password"
           placeholder="Password"
+          value={formData.password}
           onChange={handleChange}
           required
         />
