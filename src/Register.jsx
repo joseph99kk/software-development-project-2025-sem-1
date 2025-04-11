@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Register.css'; // Import your CSS file for styling  
 
 function Register() {
   const [formData, setFormData] = useState({ email:'', password: '' , role: ''});
