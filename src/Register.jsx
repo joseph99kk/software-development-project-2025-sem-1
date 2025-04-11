@@ -1,31 +1,59 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Register.css'; // Import your CSS file for styling  
+import './Register.css';
 
 function Register() {
-  const [formData, setFormData] = useState({ email:'', password: '' , role: ''});
+  const [formData, setFormData] = useState({ email: '', password: '', role: '' });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Send POST request to your Django registration endpoint here
     console.log('Registering:', formData);
+
+    // Simulate backend response
+    const mockResponse = { success: true, role: formData.role };
+
+    if (mockResponse.success) {
+      if (mockResponse.role === 'student') {
+        navigate('/student-dashboard');
+      } else if (mockResponse.role === 'registrar') {
+        navigate('/registrar-dashboard');
+      } else if (mockResponse.role === 'lecturer') {
+        navigate('/lecturer-dashboard');
+      }
+    }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="email" placeholder="email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-        <select name="role" onChange={handleChange} required>
+    <div className="register-dashboard">
+      <h1>Register</h1>
+      <p className="register-description">Please fill out the form below to create an account.</p>
+      <form onSubmit={handleSubmit} className="register-form">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <select name="role" value={formData.role} onChange={handleChange} required>
           <option value="">Select Role</option>
-          <option value="lecturer">Lecturer</option>
-          <option value="registrar">Registrar</option>  
           <option value="student">Student</option>
+          <option value="registrar">Registrar</option>
+          <option value="lecturer">Lecturer</option>
         </select>
         <button type="submit">Register</button>
       </form>
