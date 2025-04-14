@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './makerere-logo.icon';
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes ,Link} from 'react-router-dom';
