@@ -51,12 +51,14 @@ class Registrar(models.Model):
     
     def __str__(self):
         return self.issue
-    
-class Course(models.Model):
-    name = models.CharField(max_length=20)
-    
+ class Course(models.Model):
+    code = models.CharField(max_length=10)
+    name = models.CharField(max_length=100)
+    lecturer = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'lecturer'})
+
     def __str__(self):
-        return self.name
+        return f"{self.code} - {self.name}"
+
     
     
 class Student(models.Model):
