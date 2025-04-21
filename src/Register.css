@@ -37,3 +37,9 @@
 .register-form button:hover {
   background-color: #080b08;
 }
+
+html, body {
+  padding:0px;
+  margin: 0;
+  
+}
