@@ -25,7 +25,7 @@ function MainApp() {
     <div className="App">
       <header className="App-header">
         
-        {location.pathname !== '/register' && location.pathname !== '/login' && (
+        {location.pathname !== '/register' && location.pathname !== '/login' &&  location.pathname !== '/lecturer-dashboard' && (
           <img src={logo} className="App-logo" alt="logo" />
         )}
       </header>
