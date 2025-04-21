@@ -1,39 +1,46 @@
-import logo from './makerere-logo.icon';
+import logo from './makerere-logo.ico';
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes ,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import IssueForm from './IssueForm';
 import LecturerDashboard from './LecturerDashboard';
 import RegistrarDashboard from './RegistrarDashboard';
+import StudentDashboard from './StudentDashboard';
 import Register from './Register';
 import Login from './Login';
-import WelcomePage from './welcomepage';
+import WelcomePage from './WelcomePage'; 
+
 function App() {
   return (
     <Router>
+      <MainApp />
+    </Router>
+  );
+}
+
+function MainApp() {
+  const location = useLocation(); 
+
+  return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-           
+        
+        {location.pathname !== '/register' && location.pathname !== '/login' && (
+          <img src={logo} className="App-logo" alt="logo" />
+        )}
       </header>
-      <nav>
-        <ul>  
-          <li><Link to="/welcome-page"></Link></li>
-          
-        </ul>
-      </nav>
+    
       <Routes>
         <Route path="/welcome-page" element={<WelcomePage />} />
         <Route path="/" element={<IssueForm />} />
         <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
         <Route path="/registrar-dashboard" element={<RegistrarDashboard />} />
-        <Route path="/student-dashboard" element={<StudentDashboard/>} />
-  
+        <Route path="/student-dashboard" element={<StudentDashboard />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
-    </Router>
   );
-      
 }
 
 export default App;
