@@ -8,7 +8,7 @@ import RegistrarDashboard from './RegistrarDashboard';
 import StudentDashboard from './StudentDashboard';
 import Register from './Register';
 import Login from './Login';
-import WelcomePage from './WelcomePage'; 
+import WelcomePage from './WelcomePage'; // Import the WelcomePage component
 
 function App() {
   return (
@@ -19,17 +19,21 @@ function App() {
 }
 
 function MainApp() {
-  const location = useLocation(); 
+  const location = useLocation(); // Get the current route
+
+  // Define routes where the header and logo should be hidden
+  const hideHeaderRoutes = ['/register', '/login', '/lecturer-dashboard'];
 
   return (
     <div className="App">
-      <header className="App-header">
-        
-        {location.pathname !== '/register' && location.pathname !== '/login' &&  location.pathname !== '/lecturer-dashboard' && (
+      {/* Conditionally render the header */}
+      {!hideHeaderRoutes.includes(location.pathname) && (
+        <header className="App-header">
+          {/* Conditionally render the logo */}
           <img src={logo} className="App-logo" alt="logo" />
-        )}
-      </header>
-    
+        </header>
+      )}
+
       <Routes>
         <Route path="/welcome-page" element={<WelcomePage />} />
         <Route path="/" element={<IssueForm />} />
