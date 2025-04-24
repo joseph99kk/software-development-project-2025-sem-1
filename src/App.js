@@ -21,16 +21,25 @@ function App() {
 function MainApp() {
   const location = useLocation(); // Get the current route
 
-  // Define routes where the header and logo should be hidden
-  const hideHeaderRoutes = ['/register', '/login', '/lecturer-dashboard','/registrar-dashboard','/student-dashboard'];
+  // Define routes where the header should be hidden
+  const hideHeaderRoutes = ['/register', '/login', '/lecturer-dashboard', '/student-dashboard', '/registrar-dashboard', '/welcome-page'];
 
   return (
     <div className="App">
+      {/* Conditionally render the logo */}
+      <div className="App-logo-container">
+        <img
+          src={logo}
+          className="App-logo"
+          alt="logo"
+          style={{ width: '100px', height: '100px', borderRadius: '50%' }} // Example styling
+        />
+      </div>
+
       {/* Conditionally render the header */}
       {!hideHeaderRoutes.includes(location.pathname) && (
         <header className="App-header">
-          {/* Conditionally render the logo */}
-          <img src={logo} className="App-logo" alt="logo" />
+          <h1>Header Content</h1>
         </header>
       )}
 
