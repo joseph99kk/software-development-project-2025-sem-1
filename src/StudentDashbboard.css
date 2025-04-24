@@ -31,9 +31,11 @@
   .form-group input,
   .form-group textarea {
     width: 100%;
+    height: 150px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    resize:vertically;
   }
   
   .submit-button {
