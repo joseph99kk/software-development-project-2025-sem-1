@@ -5,6 +5,7 @@
     border:none;
     margin: 20px;
     font-family: Arial, sans-serif;
+    min-height: 100vh;
   }
   
   .issue-form {
