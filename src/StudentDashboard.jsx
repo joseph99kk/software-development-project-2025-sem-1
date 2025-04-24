@@ -10,8 +10,8 @@ function StudentDashboard() {
   };
 
     if (name === 'description') {
-      const words = value.trim().split(/\s+/); // Split by spaces
-      setWordCount(value.trim() === '' ? 0 : words.length);
+       const words = value.trim().split(/\s+/); // Split by spaces
+       setWordCount(value.trim() === '' ? 0 : words.length);
     }
 };
 
