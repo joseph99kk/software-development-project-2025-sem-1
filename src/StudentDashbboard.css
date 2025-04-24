@@ -58,3 +58,10 @@
   .submit-button:hover {
     background-color: #45a049;
   }
+
+  .word-count {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+  }
