@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import './StudentDashboard.css';
 function StudentDashboard() {
   const [issue, setIssue] = useState({ title: '', description: '' });
+  const [wordCount, setWordCount] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setIssue({ ...issue, [name]: value });
   };
+
+    if (name === 'description') {
+      const words = value.trim().split(/\s+/); // Split by spaces
+      setWordCount(value.trim() === '' ? 0 : words.length);
+    }
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +22,7 @@ function StudentDashboard() {
     // Add logic to send the issue to the backend or API
     alert('Issue submitted successfully!');
     setIssue({ title: '', description: '' }); // Reset the form
+    setWordCount(0); // Reset word count
   };
 
   return (
