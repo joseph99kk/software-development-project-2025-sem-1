@@ -22,7 +22,7 @@ function MainApp() {
   const location = useLocation(); // Get the current route
 
   // Define routes where the header and logo should be hidden
-  const hideHeaderRoutes = ['/register', '/login', '/lecturer-dashboard'];
+  const hideHeaderRoutes = ['/register', '/login', '/lecturer-dashboard','/registrar-dashboard','/student-dashboard'];
 
   return (
     <div className="App">
