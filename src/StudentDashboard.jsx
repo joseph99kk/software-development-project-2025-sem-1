@@ -51,7 +51,9 @@ function StudentDashboard() {
             onChange={handleChange}
             placeholder="Describe the issue in detail"
             required
-          />
+            />
+            <p className="word-counter">Words: {wordCount}</p>
+          
         </div>
         <button type="submit" className="submit-button">Submit Issue</button>
       </form>
