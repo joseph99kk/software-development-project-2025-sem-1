@@ -65,6 +65,11 @@ body.dark {
     margin-right: 15px;
     transition: all 0.3s ease;
 }
+.nav-btn:focus {
+    outline: 2px solid #ffc107;
+    outline-offset: 2px;
+}
+
 
 .nav-btn:hover,
 .nav-btn:focus {
