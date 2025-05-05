@@ -16,6 +16,9 @@ body {
     background-color: var(--light-bg);
     color: #333;
 }
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 /* Dark Mode Support (optional toggle later) */
 body.dark {
