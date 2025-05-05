@@ -141,7 +141,10 @@ body.dark {
 .content {
     padding: 20px;
     flex: 1;
+    max-width: 960px;
+    margin: 0 auto;
 }
+
 
 
 /* Issue List & Notifications */
