@@ -186,6 +186,9 @@ body.dark {
     transform: translateY(-2px);
     transition: transform 0.2s ease;
 }
+.issue-list + .issue-list {
+    margin-top: 10px;
+}
 
 
 /* Footer */
