@@ -4,6 +4,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 *, *::before, *::after {
     box-sizing: border-box;
