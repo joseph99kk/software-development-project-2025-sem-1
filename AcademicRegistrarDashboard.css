@@ -1,5 +1,8 @@
 
 /* Root Variables & Base */
+html {
+    scroll-behavior: smooth;
+}
 
 :root {
     --primary: #4a148c;
