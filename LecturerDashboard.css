@@ -1,9 +1,10 @@
 /* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
+    color: #333;
 }
 
 .header {
@@ -12,7 +13,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 16px 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo-container {
@@ -21,9 +23,9 @@ body {
 }
 
 .logo {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
+    width: 48px;
+    height: 48px;
+    margin-right: 12px;
 }
 
 .nav-btn {
@@ -31,10 +33,11 @@ body {
     border: none;
     background: none;
     color: white;
-    font-size: 1em;
-    font-weight: bold;
-    margin-right: 15px;
-    transition: color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 10px;
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
@@ -48,23 +51,21 @@ body {
 .profile {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
 }
 
 .profile-pic {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 2px solid #fff;
     background-color: #d1c4e9;
     color: #4a148c;
-    font-size: 0.7em;
+    font-size: 0.75rem;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    margin-right: 10px;
+    margin-right: 12px;
 }
 
 .profile-info {
@@ -72,39 +73,75 @@ body {
 }
 
 .name {
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 600;
     margin: 0;
 }
 
 .degree {
-    font-size: 0.9em;
+    font-size: 0.85rem;
     color: #d1c4e9;
     margin: 0;
 }
 
-.content {
-    padding: 20px;
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
+.content {
+    flex: 1;
+    padding: 24px;
+}
+
+/* Scrollable issue list */
+.issue-list {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    max-height: 400px; /* Set scroll height */
+    overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.issue-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.issue-list::-webkit-scrollbar-thumb {
+    background-color: #c5a7e5;
+    border-radius: 4px;
+}
+
+.issue-list::-webkit-scrollbar-track {
+    background: #f0e6fa;
+}
+
+/* Individual issue item */
+.issue-item {
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.issue-item:last-child {
+    border-bottom: none;
+}
+
+/* Hidden utility */
 .hidden {
     display: none;
 }
 
-/* Issue List Styling */
-.issue-list {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
+/* Footer styling */
 footer {
     background-color: #4a148c;
     color: white;
-    padding: 20px;
+    padding: 24px;
     text-align: center;
+    font-size: 0.95rem;
 }
 
 .footer-container {
@@ -114,35 +151,16 @@ footer {
 }
 
 footer p {
-    margin: 10px 0;
-    font-size: 1em;
+    margin: 8px 0;
 }
 
 footer a {
     color: #ffc107;
     text-decoration: none;
+    transition: text-decoration 0.2s ease;
 }
 
 footer a:hover {
     text-decoration: underline;
 }
-/* Make the dashboard span the full height of the viewport */
-.dashboard {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the dashboard takes up at least the height of the viewport */
-    margin: 0;
-}
 
-/* Make the content area flexible */
-.content {
-    flex: 1; /* Ensures the content section grows to fill space, pushing the footer down */
-}
-
-/* Footer styles */
-footer {
-    background-color: #4a148c;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
