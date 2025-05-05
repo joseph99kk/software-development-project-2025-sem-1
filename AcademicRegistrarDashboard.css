@@ -127,6 +127,11 @@ body.dark {
     color: var(--text-medium);
     margin: 0;
 }
+.profile-pic:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
 
 
 /* Main Content */
