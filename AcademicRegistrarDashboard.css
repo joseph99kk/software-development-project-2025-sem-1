@@ -115,6 +115,9 @@ body.dark {
 .profile-info {
     text-align: right;
 }
+.logo {
+    cursor: pointer;
+}
 
 .name {
     font-size: 1.2em;
