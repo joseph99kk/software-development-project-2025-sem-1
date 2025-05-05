@@ -41,6 +41,7 @@ body.dark {
     padding: 20px;
     flex-wrap: wrap;
     transition: background-color 0.3s ease;
+    gap: 10px;
 }
 
 .logo-container {
