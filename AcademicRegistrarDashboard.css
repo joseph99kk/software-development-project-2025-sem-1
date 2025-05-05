@@ -153,6 +153,9 @@ body.dark {
     margin: 0 auto;
     padding: 0 20px;
 }
+.centered {
+    text-align: center;
+}
 
 
 
