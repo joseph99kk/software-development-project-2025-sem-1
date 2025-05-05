@@ -162,6 +162,12 @@ body.dark {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease;
 }
+@media (max-width: 600px) {
+    .issue-list {
+        padding: 15px;
+    }
+}
+
 
 .issue-list p,
 #notifications-section p {
