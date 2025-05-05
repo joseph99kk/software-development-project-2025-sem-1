@@ -71,6 +71,9 @@ body.dark {
     outline: 2px solid #ffc107;
     outline-offset: 2px;
 }
+.degree {
+    color: #b39ddb;
+}
 
 
 .nav-btn:hover,
