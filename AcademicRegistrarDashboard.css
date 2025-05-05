@@ -86,6 +86,7 @@ body.dark {
     border-bottom: 2px solid var(--accent);
     border-bottom: 2px solid #ffc107;
     transition: border-bottom 0.3s ease;
+    background-color: rgba(255, 193, 7, 0.1);
 }
 
 
