@@ -1,65 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../components/StudentDashboard.css";
-import axios from "../components/AxiosInstance"; // Importing axios for API requests
+import axios from "../components/AxiosInstance";
+
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [wordCount, setWordCount] = useState(0);
-
-  // Form State Variables
-
   const [issueTitle, setIssueTitle] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [issueDetails, setIssueDetails] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+  const [pendingIssues, setPendingIssues] = useState([]);
 
-  // Dummy data for profile
   const studentData = {
-    name: " ",
+    name: localStorage.getItem("name") || "Student Name",
     course: "BSc. Computer Science",
-    profilePic: "default-profile.png", // To be replaced with actual path
+    profilePic: "default-profile.png", 
   };
 
-  // Handles switching between sections
   const handleSectionChange = (section) => {
     setActiveSection(section);
   };
 
-  // Handle counting characters for issue description
   const handleDescriptionChange = (e) => {
     const text = e.target.value;
-    const letters = text.split("").filter((char) => /[a-zA-Z]/.test(char));
-    setWordCount(letters.length);
+    setWordCount(text.length); // Changed from counting only letters
     setIssueDetails(text);
   };
 
-  const IssuesList = document.getElementById("issuesID");
-  const response_issues = axios.get("https://mercylina.pythonanywhere.com/api/issues/create/").then(
-    function (response) {
-      // Handle success
-      console.log(response.data);
-      response.data.forEach((issue) => {
-        const issueElement = document.createElement("div");
-        issueElement.className = "issue-item";
-        issueElement.innerHTML = `
-        <div style="display: flex; flex-direction: column; gap: 10px;">
+// fetch a useEffect  
+  useEffect(() => {
+    const fetchIssues = async () => {
+      try {
+        const response = await axios.get("https://mercylina.pythonanywhere.com/api/issues/create/");
+        setPendingIssues(response.data);
+      } catch (err) {
+        console.error("Failed to fetch issues:", err);
+      }
+    };
 
-          <h3>${issue["title"]}</h3>
-          <p><strong>Course Code:</strong> ${issue["course_code"]}</p>
-          <p><strong>Description:</strong> ${issue["description"]}</p>
-        </div>
+    fetchIssues();
+  }, []);
 
-        `;
-        IssuesList.appendChild(issueElement);
-      });
-    }
-  )
-
-  console.log(response_issues)
-
-    // iterate through and add an element in the div
-  // Handle form submission with validation
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,50 +51,45 @@ const Dashboard = () => {
       return;
     }
 
-    const issueData = {
+     const issueData = {
       title: issueTitle,
       course_code: courseCode,
       description: issueDetails,
-      email: localStorage.getItem("email"), // Assuming email is stored in localStorage
+      email: localStorage.getItem("email"),
     };
 
     try {
-      // Clear previous messages
       setSuccessMessage("");
       setError("");
 
-      // Sending POST request to Django API
-      const response = await axios.post("https://mercylina.pythonanywhere.com/api/issues/create/", issueData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(         
 
-      window.alert("successful")
-      window.location.reload()
+
+        "https://mercylina.pythonanywhere.com/api/issues/create/",
+        issueData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.status === 201) {
-        // Handle successful submission
         setSuccessMessage("Issue submitted successfully!");
-        setError(""); // Clearing any previous errors
-
-        // Clear form fields
         setIssueTitle("");
         setCourseCode("");
         setIssueDetails("");
         setWordCount(0);
+        window.alert("successful");
+        window.location.reload();
       }
     } catch (error) {
-      // Handle error during API request
       console.error("There was an error while submitting the issue:", error);
       setError("There was an error while submitting the issue. Please try again later.");
-      setSuccessMessage(""); // Clear success message
+      setSuccessMessage("");
     }
   };
 
   return (
     <div className="dashboard">
-      {/* Header Section */}
       <header className="header">
         <div className="logo-container">
           <img src="graduation-hat-logo.png" alt="AITS Logo" className="logo" />
@@ -145,7 +123,7 @@ const Dashboard = () => {
               backgroundSize: "cover",
             }}
           >
-            {!studentData.profilePic && "Profile Picture"}
+            {studentData.profilePic === "default-profile.png" && "Profile Picture"}
           </div>
           <div className="profile-info">
             <p className="name">{studentData.name}</p>
@@ -154,7 +132,6 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Main Content Section */}
       <main className="content">
         {activeSection === "home" && (
           <section id="home-section">
@@ -162,15 +139,24 @@ const Dashboard = () => {
             <div className="empty-state">
               <p>No resolved issues yet. Once issues are resolved, they'll show up here.</p>
             </div>
+
             <h2>Pending Issues</h2>
-            <div className="empty-state">
-
-
-              <div className="issues" id="issuesID">
-
-              </div>
-
-
+            <div className="issues" id="issuesID">
+              {pendingIssues.length > 0 ? (
+                pendingIssues.map((issue, index) => (
+                  <div className="issue-item" key={index}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                      <h3>{issue.title}</h3>
+                      <p><strong>Course Code:</strong> {issue.course_code}</p>
+                      <p><strong>Description:</strong> {issue.description}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="empty-state">
+                  <p>Loading or no issues found.</p>
+                </div>
+              )}
             </div>
           </section>
         )}
@@ -231,19 +217,11 @@ const Dashboard = () => {
         )}
       </main>
 
-      {/* Footer Section */}
       <footer>
         <div className="footer-container">
-          <p>
-            <strong>Info:</strong> Makerere University
-          </p>
-          <p>
-            <strong>AITS:</strong> Academic Issue Tracking System
-          </p>
-          <p>
-            <strong>Contact Us:</strong> (256) 700953462 |{" "}
-            <a href="mailto:AITS@gmail.com">AITS@gmail.com</a>
-          </p>
+          <p><strong>Info:</strong> Makerere University</p>
+          <p><strong>AITS:</strong> Academic Issue Tracking System</p>
+          <p><strong>Contact Us:</strong> (256) 700953462 | <a href="mailto:AITS@gmail.com">AITS@gmail.com</a></p>
         </div>
       </footer>
     </div>

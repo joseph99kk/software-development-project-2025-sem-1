@@ -1,0 +1,68 @@
+.student-dashboard {
+    text-align: center;
+    color:rgb(16, 4, 4);
+    padding: 10px 32px;
+    border:none;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+  }
+  
+  .issue-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  .form-group textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize:vertically;
+  }
+  
+  .submit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+
+  
+  .word-count {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+  }

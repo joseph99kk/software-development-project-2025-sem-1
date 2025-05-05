@@ -1,9 +1,21 @@
-/* General Styling */
+
+/* Root Variables & Base */
+
+:root {
+    --primary: #4a148c;
+    --accent: #ffc107;
+    --light-bg: #f7f7f7;
+    --text-light: #d1c4e9;
+    --text-medium: #b39ddb;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
+    background-color: var(--light-bg);
+    color: #333;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -11,18 +23,30 @@ body {
     box-sizing: border-box;
 }
 
+/* Dark Mode Support (optional toggle later) */
+body.dark {
+    background-color: #121212;
+    color: #eee;
+}
+
+
+/* Header Section */
+
 .header {
-    background-color: #4a148c;
+    background-color: var(--primary);
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    flex-wrap: wrap;
+    transition: background-color 0.3s ease;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -39,21 +63,27 @@ body {
     font-size: 1em;
     font-weight: bold;
     margin-right: 15px;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.nav-btn:hover {
-    color: #ffc107;
+.nav-btn:hover,
+.nav-btn:focus {
+    color: var(--accent);
+    outline: none;
 }
 
 .nav-btn.active {
-    border-bottom: 2px solid #ffc107;
+    border-bottom: 2px solid var(--accent);
 }
+
+
+/* Profile Section */
 
 .profile {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-top: 10px;
 }
 
 .profile-pic {
@@ -61,8 +91,8 @@ body {
     height: 50px;
     border-radius: 50%;
     border: 2px solid #fff;
-    background-color: #d1c4e9;
-    color: #4a148c;
+    background-color: var(--text-light);
+    color: var(--primary);
     font-size: 0.7em;
     font-weight: bold;
     display: flex;
@@ -70,6 +100,11 @@ body {
     justify-content: center;
     text-align: center;
     margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-pic:hover {
+    background-color: var(--text-medium);
 }
 
 .profile-info {
@@ -84,41 +119,56 @@ body {
 
 .degree {
     font-size: 0.9em;
-    color: #d1c4e9;
+    color: var(--text-medium);
+    margin: 0;
+}
+
+
+/* Main Content */
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0;
 }
 
 .content {
     padding: 20px;
+    flex: 1;
 }
 
-.hidden {
-    display: none;
-}
 
-/* Issue List and Notifications Section Styling */
-.issue-list, #notifications-section {
+/* Issue List & Notifications */
+
+.issue-list,
+#notifications-section {
     background: white;
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
 }
 
-.issue-list p, #notifications-section p {
+.issue-list p,
+#notifications-section p {
     margin: 0;
     font-size: 1.1em;
     color: #333;
-    font-weight: normal; /* Regular weight for no-issues or no-notifications message */
-    text-align: center; /* Center align the text */
+    font-weight: normal;
+    text-align: center;
 }
 
-/* Footer Section */
+
+/* Footer */
+
 footer {
-    background-color: #4a148c;
+    background-color: var(--primary);
     color: white;
     padding: 20px;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .footer-container {
@@ -133,23 +183,46 @@ footer p {
 }
 
 footer a {
-    color: #ffc107;
+    color: var(--accent);
     text-decoration: none;
+    transition: text-decoration 0.3s ease;
 }
 
 footer a:hover {
     text-decoration: underline;
 }
 
-/* Making the dashboard span the full height of the viewport */
-.dashboard {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the dashboard takes up at least the height of the viewport */
-    margin: 0;
+/* ===================== */
+/* Utility */
+/* ===================== */
+.hidden {
+    display: none;
 }
 
-/* Making the content area flexible */
-.content {
-    flex: 1; /* Ensures the content section grows to fill space, pushing the footer down */
+/* Custom Scrollbar (Webkit-based) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 10px;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .header,
+    .profile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-btn {
+        margin: 10px 0;
+    }
+
+    .profile-info {
+        text-align: left;
+    }
 }
