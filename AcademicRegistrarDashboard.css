@@ -81,6 +81,8 @@ body.dark {
 
 .nav-btn.active {
     border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid #ffc107;
+    transition: border-bottom 0.3s ease;
 }
 
 
