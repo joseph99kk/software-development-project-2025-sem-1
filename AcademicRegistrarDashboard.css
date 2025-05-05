@@ -180,6 +180,10 @@ body.dark {
     font-weight: normal;
     text-align: center;
 }
+.issue-list:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
 
 
 /* Footer */
