@@ -6,6 +6,7 @@ function Register() {
   const [formData, setFormData] = useState({ email: '', password: '', role: '' });
   const navigate = useNavigate();
 
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
