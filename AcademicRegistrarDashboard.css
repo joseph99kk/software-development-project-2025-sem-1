@@ -1,5 +1,8 @@
 
 /* Root Variables & Base */
+html {
+    scroll-behavior: smooth;
+}
 
 :root {
     --primary: #4a148c;
@@ -13,8 +16,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f7f7f7;
     background-color: var(--light-bg);
     color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 /* Dark Mode Support (optional toggle later) */
@@ -35,6 +45,7 @@ body.dark {
     padding: 20px;
     flex-wrap: wrap;
     transition: background-color 0.3s ease;
+    gap: 10px;
 }
 
 .logo-container {
@@ -59,6 +70,14 @@ body.dark {
     margin-right: 15px;
     transition: all 0.3s ease;
 }
+.nav-btn:focus {
+    outline: 2px solid #ffc107;
+    outline-offset: 2px;
+}
+.degree {
+    color: #b39ddb;
+}
+
 
 .nav-btn:hover,
 .nav-btn:focus {
@@ -68,6 +87,9 @@ body.dark {
 
 .nav-btn.active {
     border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid #ffc107;
+    transition: border-bottom 0.3s ease;
+    background-color: rgba(255, 193, 7, 0.1);
 }
 
 
@@ -104,6 +126,9 @@ body.dark {
 .profile-info {
     text-align: right;
 }
+.logo {
+    cursor: pointer;
+}
 
 .name {
     font-size: 1.2em;
@@ -116,6 +141,11 @@ body.dark {
     color: var(--text-medium);
     margin: 0;
 }
+.profile-pic:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
 
 
 /* Main Content */
@@ -130,7 +160,14 @@ body.dark {
 .content {
     padding: 20px;
     flex: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
+.centered {
+    text-align: center;
+}
+
 
 
 /* Issue List & Notifications */
@@ -144,6 +181,12 @@ body.dark {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease;
 }
+@media (max-width: 600px) {
+    .issue-list {
+        padding: 15px;
+    }
+}
+
 
 .issue-list p,
 #notifications-section p {
@@ -153,6 +196,13 @@ body.dark {
     font-weight: normal;
     text-align: center;
 }
+.issue-list:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+.issue-list + .issue-list {
+    margin-top: 10px;
+}
 
 
 /* Footer */
@@ -161,8 +211,8 @@ footer {
     background-color: var(--primary);
     color: white;
     padding: 20px;
-    text-align: center;
     transition: background-color 0.3s ease;
+    text-align: center;
 }
 
 .footer-container {
