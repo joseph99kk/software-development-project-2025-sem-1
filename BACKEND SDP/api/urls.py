@@ -1,17 +1,28 @@
-# api/urls.py
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 from . import views
-
-router = DefaultRouter()
-router.register(r'issues', views.IssueViewSet, basename='issue')
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 urlpatterns = [
-    path('', include(router.urls)),
-    path('token-auth/', views.CustomAuthToken.as_view(), name='token_auth'),
-    path('register/', views.register_user, name='register'),
-    path('users/me/', views.current_user, name='current_user'),
-    path('issues/<int:issue_id>/comments/', views.CommentViewSet.as_view({'get': 'list', 'post': 'create'}), name='issue_comments'),
-    path('issues/<int:issue_id>/comments/<int:pk>/', views.CommentViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='comment_detail'),
+    path('token/', views.CustomTokenObtainPairView.as_view()),
+    path('token/refresh', TokenRefreshView.as_view()),
+    path('signup/', views.sign_up),
+    path('login/', views.login),
+    path('update_profile/<str:pk>', views.update_profile),
+    path('courses/<str:pk>', views.courses),
+    path('all_courses/<str:pk>', views.all_courses),
+    path('programmes/', views.programmes),
+    path('lecturers/', views.lecturers),
+    path('student_statistics/<str:pk>', views.student_statistics),
+    path('notifications/<str:pk>', views.notifications),
+    path('view_notifications/<str:pk>', views.view_notifications),
+    path('academic_years/', views.academic_years),
+    path('registration_issues/<str:pk>', views.registration_issues),
+    path('missing_marks/<str:pk>', views.missing_marks),
+    path('sent_complaints/<str:pk>', views.sent_complaints),
+    path('reg_complaints/<str:pk>', views.reg_complaints),
+    path('update_reg_complaint/<str:pk>', views.update_reg_complaint),
+    path('update_marks_complaint/<str:pk>', views.update_marks_complaint),
+    path('marks_complaints/<str:pk>', views.marks_complaints),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('reset-password/<str:token>/', views.reset_password, name='reset_password'),
 ]
 
