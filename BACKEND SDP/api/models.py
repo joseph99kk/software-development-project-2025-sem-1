@@ -1,57 +1,113 @@
-# api/models.py
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
+class AcademicYear(models.Model):
+    title = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title  
+
+# program
+class Programme(models.Model):
+    name = models.CharField(max_length=100, unique = True)
+    number_of_years = models.IntegerField(default=3)
+
+    class Meta:
+        ordering = ['name']
+    
+    def __str__(self):
+        return self.name
+    
+    
 class User(AbstractUser):
-    ROLE_CHOICES = [
-        ('student', 'Student'),
-        ('lecturer', 'Lecturer'),
-        ('registrar', 'Registrar'),
-        ('admin', 'Admin'),
-    ]
-    
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
-    registration_number = models.CharField(max_length=20, blank=True)
-    
-    def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.role})"
+    OTP = models.CharField(max_length=100, null=True, blank=True)
+    role = models.CharField(max_length=100, default="user")
+    registration_number = models.CharField(unique=True,max_length=100 , null=True, blank = True)
+    student_number = models.CharField(unique = True, max_length=100, null= True, blank = True)
+    programme = models.ForeignKey(Programme, on_delete=models.SET_NULL, null=True, blank=True)
+    username = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    email = models.EmailField(unique=True)
+    has_profile = models.BooleanField(default=False)
 
-class Issue(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('assigned', 'Assigned'),
-        ('in_progress', 'In Progress'),
-        ('resolved', 'Resolved'),
-        ('closed', 'Closed'),
-    ]
+    REQUIRED_FIELDS = ["username"]
+    USERNAME_FIELD = "email"
     
-    PRIORITY_CHOICES = [
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High'),
-        ('urgent', 'Urgent'),
-    ]
+# common complaint fields 
+class CommonComplaintIssue(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    year_of_study = models.CharField(max_length=100)
+    seen = models.BooleanField(default=False)
+    academic_year = models.ForeignKey(AcademicYear, on_delete=models.SET_NULL, null = True)
+    status = models.CharField(max_length=100, default="pending") 
+
+    class Meta:
+        ordering = ['-created']     
+
+
+
+# course 
+class Course(models.Model):
+    name = models.CharField(max_length=100, unique= True)
+    code = models.CharField(max_length=100, unique=True) 
+    semester = models.CharField(max_length=2)
+    programme = models.ForeignKey(Programme, on_delete=models.CASCADE)
+    lecturer = models.ForeignKey(User, on_delete=models.CASCADE)   
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     
-    title = models.CharField(max_length=200)
-    course_code = models.CharField(max_length=20)
+
+    def __str__(self):
+         return self.name
+    
+
+# missing marks complaint   
+class MissingMarksComplaint(CommonComplaintIssue):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.created)
+    
+    
+# registration issues 
+class RegistrationComplaint(CommonComplaintIssue):
+    subject = models.CharField(max_length=100)
     details = models.TextField()
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='pending')
-    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    # Relationships
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_issues')
-    lecturer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_issues')
-    
+   
     def __str__(self):
-        return self.title
+        return self.subject[0:20]
+    
 
-class Comment(models.Model):
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+class Notification(models.Model):
+    severity = models.CharField(max_length=100)
+    body = models.TextField()
+    sent = models.DateTimeField(auto_now=True)
+    reciever = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_viewed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-sent']      
+
     def __str__(self):
-        return f"Comment by {self.user.username} on {self.issue.title}"
+        return self.body[0:20]
+    
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    used = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Password reset token for {self.user.email}"
+    
+
+  
